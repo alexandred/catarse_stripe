@@ -140,7 +140,7 @@ module CatarseStripe::Payment
           {
           customer: @backer.payment_token,
           amount: @backer.price_in_cents,
-          currency: 'usd',
+          currency: @backer.project.currency,
           description: t('stripe_description', scope: SCOPE, :project_name => @backer.project.name, :value => @backer.display_value),
           application_fee: (@backer.price_in_cents * ::Configuration['catarse_fee'].to_f).to_i
           },
