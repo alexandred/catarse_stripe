@@ -65,7 +65,7 @@ module CatarseStripe::Payment
         refund_backer(details, stripe_key)
       end
       return render status: 200, nothing: true
-    rescue Stripe::CardError => e
+    rescue Stripe::CardError, Stripe::InvalidRequestError => e
       ::Airbrake.notify({ :error_class => "Stripe Notification Error", :error_message => "Stripe Notification Error: #{e.inspect}", :parameters => params}) rescue nil
       return render status: 200, nothing: true
     end
